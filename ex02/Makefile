@@ -18,7 +18,7 @@ CXXFLAGS    := -Wall -Wextra -Werror -std=c++98 -Iinc
 SRC_DIR     := src
 OBJ_DIR     := obj
 
-SRC_FILES   := main.cpp ClapTrap.cpp
+SRC_FILES   := main.cpp ScavTrap.cpp ClapTrap.cpp FragTrap.cpp
 SRC         := $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ         := $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.cpp=.o))
 DEP         := $(OBJ:.o=.d)
