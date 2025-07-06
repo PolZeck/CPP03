@@ -3,29 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pol <pol@student.42.fr>                    #+#  +:+       +#+        */
+/*   By: pledieu <pledieu@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-07-05 21:51:57 by pol               #+#    #+#             */
-/*   Updated: 2025-07-05 21:51:57 by pol              ###   ########.fr       */
+/*   Created: 2025/07/05 21:51:57 by pol               #+#    #+#             */
+/*   Updated: 2025/07/06 11:20:10 by pledieu          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
-int main() {
-	ScavTrap s("Sentinel");
+int main()
+{
+	std::cout << "\n--- ScavTrap canonical form ---\n";
+	ScavTrap a("Guardian");
+	ScavTrap b;
+	b = a;
 
-	s.attack("TargetDummy");
-	s.takeDamage(40);
-	s.beRepaired(20);
-	s.guardGate();
+	std::cout << "\n--- Copy constructor ---\n";
+	ScavTrap c(a);
 
-	for (int i = 0; i < 6; ++i)
-		s.attack("Enemy");
+	std::cout << "\n--- Attack overload test ---\n";
+	a.attack("Intruder");
+	b.attack("Enemy");
 
-	s.takeDamage(100);  // pour le mettre KO
-	s.attack("Another enemy"); // ne devrait rien faire
-	s.beRepaired(10); // ne devrait rien faire non plus
+	std::cout << "\n--- Guard mode ---\n";
+	a.guardGate();
+	c.guardGate();
 
+	std::cout << "\n--- Energy limit ---\n";
+	for (int i = 0; i < 51; ++i)
+		a.attack("Endless Enemy");
+
+	std::cout << "\n--- Death test ---\n";
+	b.takeDamage(150);
+	b.attack("Doesn't work");
+	b.beRepaired(5);
+	b.guardGate(); // still works, since guardGate doesn't require HP
+
+	std::cout << "\n--- Destruction order ---\n";
 	return 0;
 }
